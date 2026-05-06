@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Advanced To-Do App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>To-Do List</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter task">
+  <button onclick="addTask()">Add</button>
+
+  <br><br>
+
+  <!-- Search -->
+  <input type="text" id="searchInput" placeholder="Search tasks" onkeyup="renderTasks()">
+
+  <br><br>
+
+  <!-- Filters -->
+  <button onclick="setFilter('all')">All</button>
+  <button onclick="setFilter('completed')">Completed</button>
+  <button onclick="setFilter('pending')">Pending</button>
+  <button onclick="clearAll()">Clear All</button>
+
+  <ul id="taskList"></ul>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
