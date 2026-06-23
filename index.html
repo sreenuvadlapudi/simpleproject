@@ -1,797 +1,166 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Todo App</title>
-
-  <style>
-
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body{
-      font-family:'Poppins',sans-serif;
-      min-height:100vh;
-      background:linear-gradient(135deg,#667eea,#764ba2);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-      transition:0.4s;
-    }
-
-    /* Light Theme */
-
-    body.light{
-      background:linear-gradient(135deg,#f5f7fa,#c3cfe2);
-    }
-
-    body.light .container{
-      background:white;
-      color:black;
-    }
-
-    body.light input{
-      background:#f1f1f1;
-      color:black;
-    }
-
-    body.light input::placeholder{
-      color:#666;
-    }
-
-    body.light li{
-      background:#f1f1f1;
-    }
-
-    .container{
-      width:100%;
-      max-width:700px;
-      background:rgba(255,255,255,0.12);
-      backdrop-filter:blur(15px);
-      border-radius:25px;
-      padding:30px;
-      box-shadow:0 10px 40px rgba(0,0,0,0.2);
-      color:white;
-    }
-
-    h1{
-      text-align:center;
-      margin-bottom:25px;
-      font-size:2.2rem;
-    }
-
-    /* Theme Button */
-
-    .theme-btn{
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:12px;
-      margin-bottom:20px;
-      cursor:pointer;
-      font-weight:600;
-    }
-
-    /* Input Section */
-
-    .input-section{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:20px;
-    }
-
-    input{
-      flex:1;
-      padding:14px;
-      border:none;
-      outline:none;
-      border-radius:12px;
-      background:rgba(255,255,255,0.2);
-      color:white;
-      font-size:15px;
-    }
-
-    input::placeholder{
-      color:#ddd;
-    }
-
-    .add-btn{
-      padding:14px 20px;
-      border:none;
-      border-radius:12px;
-      background:#00e676;
-      cursor:pointer;
-      font-weight:600;
-    }
-
-    .voice-btn{
-      padding:14px 18px;
-      border:none;
-      border-radius:12px;
-      background:#ffca28;
-      cursor:pointer;
-      font-size:18px;
-    }
-
-    /* Search */
-
-    .search-box{
-      width:100%;
-      margin-bottom:20px;
-    }
-
-    /* Filters */
-
-    .filters{
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      margin-bottom:20px;
-      flex-wrap:wrap;
-    }
-
-    .filter-btn{
-      padding:10px 15px;
-      border:none;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:500;
-    }
-
-    .active{
-      background:#00e676;
-    }
-
-    /* Todo List */
-
-    ul{
-      list-style:none;
-    }
-
-    li{
-      background:rgba(255,255,255,0.15);
-      padding:15px;
-      border-radius:15px;
-      margin-bottom:15px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:15px;
-      cursor:grab;
-    }
-
-    .completed .task-text{
-      text-decoration:line-through;
-      opacity:0.6;
-    }
-
-    .task-details{
-      flex:1;
-    }
-
-    .task-text{
-      font-size:17px;
-      display:block;
-      margin-bottom:5px;
-    }
-
-    .task-time{
-      font-size:12px;
-      opacity:0.7;
-      display:block;
-    }
-
-    .actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .actions button{
-      border:none;
-      padding:8px 12px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:500;
-    }
-
-    .done-btn{
-      background:#00e676;
-    }
-
-    .edit-btn{
-      background:#ffca28;
-    }
-
-    .delete-btn{
-      background:#ff5252;
-      color:white;
-    }
-
-    /* Progress Bar */
-
-    .progress-container{
-      width:100%;
-      height:18px;
-      background:rgba(255,255,255,0.2);
-      border-radius:20px;
-      overflow:hidden;
-      margin-top:20px;
-    }
-
-    .progress-bar{
-      height:100%;
-      width:0%;
-      background:#00e676;
-      transition:0.4s;
-    }
-
-    /* Stats */
-
-    .stats{
-      margin-top:20px;
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .clear-btn{
-      width:100%;
-      margin-top:20px;
-      padding:12px;
-      border:none;
-      border-radius:12px;
-      background:#ff1744;
-      color:white;
-      font-weight:600;
-      cursor:pointer;
-    }
-
-    .empty{
-      text-align:center;
-      margin-top:20px;
-      opacity:0.7;
-    }
-
-    @media(max-width:650px){
-
-      .input-section{
-        flex-direction:column;
-      }
-
-      li{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .actions{
-        width:100%;
-      }
-
-      .actions button{
-        flex:1;
-      }
-
-    }
-
-  </style>
-
+  <title>Focus Workspace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
+      <div class="workspace-switcher">
+        <div class="workspace-mark" aria-hidden="true">F</div>
+        <div class="workspace-copy">
+          <strong>Focus Workspace</strong>
+          <span>Personal pages</span>
+        </div>
+      </div>
 
-  <div class="container">
+      <div class="sidebar-actions">
+        <button class="nav-action primary" id="newPageBtn" type="button">New page</button>
+        <button class="nav-action" id="commandBtn" type="button">
+          Command menu
+          <kbd>Ctrl K</kbd>
+        </button>
+      </div>
 
-    <!-- Theme Button -->
+      <section class="sidebar-section" aria-labelledby="favoritesLabel">
+        <div class="section-title" id="favoritesLabel">Favorites</div>
+        <div class="page-stack" id="favoriteList"></div>
+      </section>
 
-    <button id="themeToggle" class="theme-btn">
-      🌙 Dark / Light Mode
-    </button>
+      <section class="sidebar-section pages-section" aria-labelledby="pagesLabel">
+        <div class="section-title with-action">
+          <span id="pagesLabel">Pages</span>
+          <button class="icon-button" id="addPageMiniBtn" type="button" aria-label="Add page">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"></path>
+            </svg>
+          </button>
+        </div>
+        <nav class="page-stack" id="pageList"></nav>
+      </section>
 
-    <h1>✨ Advanced Todo App</h1>
+      <div class="sidebar-footer">
+        <div>
+          <span class="mini-label">Workspace</span>
+          <strong id="workspaceCount">0 pages</strong>
+        </div>
+        <div class="mini-progress" aria-hidden="true">
+          <span id="sidebarProgress"></span>
+        </div>
+      </div>
+    </aside>
 
-    <!-- Input Section -->
+    <main class="workspace">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menuBtn" type="button" aria-label="Open navigation">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+        <div class="breadcrumbs" id="breadcrumbs">Focus Workspace</div>
+        <div class="topbar-actions">
+          <label class="search-field">
+            <span class="sr-only">Search tasks</span>
+            <input id="taskSearchInput" type="search" placeholder="Search workspace">
+          </label>
+          <button class="toolbar-button" id="themeToggle" type="button">Dark</button>
+        </div>
+      </header>
 
-    <div class="input-section">
+      <div class="workspace-grid">
+        <article class="editor-panel" aria-labelledby="pageTitle">
+          <div class="page-toolbar">
+            <div>
+              <span class="mini-label">Document</span>
+              <span id="pageUpdated">Autosaved</span>
+            </div>
+            <div class="page-toolbar-actions">
+              <button class="toolbar-button" id="favoriteBtn" type="button">Star</button>
+              <button class="toolbar-button danger subtle" id="deletePageBtn" type="button">Delete</button>
+            </div>
+          </div>
 
-      <input
-        type="text"
-        id="taskInput"
-        placeholder="Enter your task..."
-      >
+          <input class="page-title-input" id="pageTitle" type="text" aria-label="Page title">
+          <div class="block-list" id="blockList"></div>
 
-      <input type="date" id="dueDate">
+          <div class="block-composer">
+            <div class="composer-input-wrap">
+              <input id="blockInput" type="text" placeholder="Type / for blocks">
+              <div class="slash-menu hidden" id="slashMenu"></div>
+            </div>
+            <button class="toolbar-button strong" id="addBlockBtn" type="button">Add block</button>
+          </div>
+        </article>
 
-      <button class="add-btn" onclick="addTask()">
-        Add
-      </button>
+        <aside class="database-panel" aria-labelledby="databaseTitle">
+          <div class="database-header">
+            <div>
+              <span class="mini-label">Database</span>
+              <h2 id="databaseTitle">Tasks</h2>
+              <p id="taskSummary">0 tasks</p>
+            </div>
+            <button class="toolbar-button strong" id="newTaskToggle" type="button">Add task</button>
+          </div>
 
-      <button class="voice-btn" id="voiceBtn">
-        🎤
-      </button>
+          <div class="database-controls">
+            <label>
+              <span>Status</span>
+              <select id="statusFilter">
+                <option value="all">All tasks</option>
+                <option value="Backlog">Backlog</option>
+                <option value="In progress">In progress</option>
+                <option value="Done">Done</option>
+              </select>
+            </label>
 
-    </div>
+            <div class="segmented" role="tablist" aria-label="Task view">
+              <button class="segment active" data-view="table" type="button" role="tab">Table</button>
+              <button class="segment" data-view="board" type="button" role="tab">Board</button>
+            </div>
+          </div>
 
-    <!-- Search -->
+          <form class="task-form hidden" id="taskForm">
+            <input id="taskTitle" type="text" placeholder="Task name">
+            <div class="task-form-grid">
+              <select id="taskStatus" aria-label="Task status">
+                <option>Backlog</option>
+                <option>In progress</option>
+                <option>Done</option>
+              </select>
+              <select id="taskPriority" aria-label="Task priority">
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+              </select>
+              <input id="taskDue" type="date" aria-label="Task due date">
+              <select id="taskPage" aria-label="Linked page"></select>
+            </div>
+            <textarea id="taskNotes" rows="3" placeholder="Notes"></textarea>
+            <div class="form-actions">
+              <button class="toolbar-button" id="cancelTaskBtn" type="button">Cancel</button>
+              <button class="toolbar-button strong" type="submit">Save task</button>
+            </div>
+          </form>
 
-    <input
-      type="text"
-      id="searchInput"
-      class="search-box"
-      placeholder="Search tasks..."
-    >
-
-    <!-- Filters -->
-
-    <div class="filters">
-
-      <button class="filter-btn active" data-filter="all">
-        All
-      </button>
-
-      <button class="filter-btn" data-filter="completed">
-        Completed
-      </button>
-
-      <button class="filter-btn" data-filter="pending">
-        Pending
-      </button>
-
-    </div>
-
-    <!-- Todo List -->
-
-    <ul id="taskList"></ul>
-
-    <!-- Empty Message -->
-
-    <p class="empty" id="emptyMessage">
-      No tasks available
-    </p>
-
-    <!-- Progress Bar -->
-
-    <div class="progress-container">
-
-      <div class="progress-bar" id="progressBar"></div>
-
-    </div>
-
-    <!-- Stats -->
-
-    <div class="stats">
-
-      <span>Total: <span id="totalTasks">0</span></span>
-
-      <span>Completed: <span id="completedTasks">0</span></span>
-
-      <span>Pending: <span id="pendingTasks">0</span></span>
-
-    </div>
-
-    <!-- Clear Button -->
-
-    <button class="clear-btn" onclick="clearAll()">
-      Clear All Tasks
-    </button>
-
+          <div class="task-table" id="taskTable"></div>
+          <div class="task-board hidden" id="taskBoard"></div>
+        </aside>
+      </div>
+    </main>
   </div>
 
-  <script>
-
-    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-    let currentFilter = "all";
-
-    const taskInput = document.getElementById("taskInput");
-    const dueDateInput = document.getElementById("dueDate");
-    const taskList = document.getElementById("taskList");
-    const searchInput = document.getElementById("searchInput");
-    const emptyMessage = document.getElementById("emptyMessage");
-
-    /* Add Task */
-
-    function addTask(){
-
-      const text = taskInput.value.trim();
-      const dueDate = dueDateInput.value;
-
-      if(text === ""){
-        alert("Please enter a task");
-        return;
-      }
-
-      const task = {
-
-        id: Date.now(),
-        text:text,
-        completed:false,
-        time:new Date().toLocaleString(),
-        dueDate:dueDate
-
-      };
-
-      tasks.push(task);
-
-      saveTasks();
-      renderTasks();
-
-      taskInput.value = "";
-      dueDateInput.value = "";
-
-    }
-
-    /* Render Tasks */
-
-    function renderTasks(){
-
-      taskList.innerHTML = "";
-
-      const searchText =
-      searchInput.value.toLowerCase();
-
-      let filteredTasks = tasks.filter(task => {
-
-        const matchesSearch =
-        task.text.toLowerCase()
-        .includes(searchText);
-
-        if(currentFilter === "completed"){
-          return task.completed && matchesSearch;
-        }
-
-        if(currentFilter === "pending"){
-          return !task.completed && matchesSearch;
-        }
-
-        return matchesSearch;
-
-      });
-
-      if(filteredTasks.length === 0){
-        emptyMessage.style.display = "block";
-      }else{
-        emptyMessage.style.display = "none";
-      }
-
-      filteredTasks.forEach(task => {
-
-        const li = document.createElement("li");
-
-        li.setAttribute("draggable", true);
-
-        li.dataset.id = task.id;
-
-        if(task.completed){
-          li.classList.add("completed");
-        }
-
-        li.innerHTML = `
-
-          <div class="task-details">
-
-            <span class="task-text">
-              ${task.text}
-            </span>
-
-            <span class="task-time">
-              Created: ${task.time}
-            </span>
-
-            <span class="task-time">
-              Due Date:
-              ${task.dueDate || "No Date"}
-            </span>
-
-          </div>
-
-          <div class="actions">
-
-            <button
-              class="done-btn"
-              onclick="toggleTask(${task.id})"
-            >
-              ${task.completed ? "Undo" : "Done"}
-            </button>
-
-            <button
-              class="edit-btn"
-              onclick="editTask(${task.id})"
-            >
-              Edit
-            </button>
-
-            <button
-              class="delete-btn"
-              onclick="deleteTask(${task.id})"
-            >
-              Delete
-            </button>
-
-          </div>
-
-        `;
-
-        taskList.appendChild(li);
-
-      });
-
-      updateStats();
-
-    }
-
-    /* Toggle Task */
-
-    function toggleTask(id){
-
-      tasks = tasks.map(task => {
-
-        if(task.id === id){
-          task.completed = !task.completed;
-        }
-
-        return task;
-
-      });
-
-      saveTasks();
-      renderTasks();
-
-    }
-
-    /* Delete Task */
-
-    function deleteTask(id){
-
-      tasks = tasks.filter(task =>
-        task.id !== id
-      );
-
-      saveTasks();
-      renderTasks();
-
-    }
-
-    /* Edit Task */
-
-    function editTask(id){
-
-      const task =
-      tasks.find(task => task.id === id);
-
-      const updatedText =
-      prompt("Edit Task", task.text);
-
-      if(updatedText !== null &&
-         updatedText.trim() !== ""){
-
-        task.text = updatedText;
-
-        saveTasks();
-        renderTasks();
-
-      }
-
-    }
-
-    /* Clear All */
-
-    function clearAll(){
-
-      const confirmDelete =
-      confirm("Delete all tasks?");
-
-      if(confirmDelete){
-
-        tasks = [];
-
-        saveTasks();
-        renderTasks();
-
-      }
-
-    }
-
-    /* Save Local Storage */
-
-    function saveTasks(){
-
-      localStorage.setItem(
-        "tasks",
-        JSON.stringify(tasks)
-      );
-
-    }
-
-    /* Update Stats */
-
-    function updateStats(){
-
-      const total = tasks.length;
-
-      const completed =
-      tasks.filter(task =>
-        task.completed
-      ).length;
-
-      const pending = total - completed;
-
-      document.getElementById(
-        "totalTasks"
-      ).innerText = total;
-
-      document.getElementById(
-        "completedTasks"
-      ).innerText = completed;
-
-      document.getElementById(
-        "pendingTasks"
-      ).innerText = pending;
-
-      const progress =
-      total === 0
-      ? 0
-      : (completed / total) * 100;
-
-      document.getElementById(
-        "progressBar"
-      ).style.width = `${progress}%`;
-
-    }
-
-    /* Search */
-
-    searchInput.addEventListener(
-      "input",
-      renderTasks
-    );
-
-    /* Filters */
-
-    const filterButtons =
-    document.querySelectorAll(".filter-btn");
-
-    filterButtons.forEach(button => {
-
-      button.addEventListener("click", () => {
-
-        filterButtons.forEach(btn =>
-          btn.classList.remove("active")
-        );
-
-        button.classList.add("active");
-
-        currentFilter =
-        button.dataset.filter;
-
-        renderTasks();
-
-      });
-
-    });
-
-    /* Enter Key */
-
-    taskInput.addEventListener(
-      "keypress",
-      function(e){
-
-        if(e.key === "Enter"){
-          addTask();
-        }
-
-      }
-    );
-
-    /* Theme Toggle */
-
-    const themeToggle =
-    document.getElementById("themeToggle");
-
-    themeToggle.addEventListener(
-      "click",
-      () => {
-
-        document.body.classList.toggle("light");
-
-      }
-    );
-
-    /* Voice Input */
-
-    const voiceBtn =
-    document.getElementById("voiceBtn");
-
-    const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-    if(SpeechRecognition){
-
-      const recognition =
-      new SpeechRecognition();
-
-      voiceBtn.addEventListener(
-        "click",
-        () => {
-
-          recognition.start();
-
-        }
-      );
-
-      recognition.onresult =
-      function(event){
-
-        const transcript =
-        event.results[0][0].transcript;
-
-        taskInput.value = transcript;
-
-      };
-
-    }
-
-    /* Drag and Drop */
-
-    let dragItem = null;
-
-    document.addEventListener(
-      "dragstart",
-      (e) => {
-
-        dragItem = e.target;
-
-      }
-    );
-
-    document.addEventListener(
-      "dragover",
-      (e) => {
-
-        e.preventDefault();
-
-      }
-    );
-
-    document.addEventListener(
-      "drop",
-      (e) => {
-
-        e.preventDefault();
-
-        const dropItem =
-        e.target.closest("li");
-
-        if(dropItem &&
-           dragItem !== dropItem){
-
-          taskList.insertBefore(
-            dragItem,
-            dropItem
-          );
-
-        }
-
-      }
-    );
-
-    /* Initial Render */
-
-    renderTasks();
-
-  </script>
-
+  <div class="command-overlay hidden" id="commandOverlay" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
+    <div class="command-panel">
+      <h2 id="commandTitle">Command menu</h2>
+      <input id="commandSearch" type="search" placeholder="Search commands">
+      <div class="command-list" id="commandList"></div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
 </body>
-
 </html>
